@@ -39,7 +39,7 @@ function App() {
       <BrowserRouter>
         <NavBar/>
         <Routes>
-          <Route  element={<Home/>} path="/" />
+          <Route  element={<Home db={database}/>} path="/" />
           <Route element={<Teacher/>} path="teacher" />
           <Route  element={<Student/>} path="student" />
           <Route  element={<Calendar/>} path="calendar" />
