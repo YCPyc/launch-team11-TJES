@@ -16,12 +16,12 @@ import {collection, doc, updateDoc, addDoc, getDocs, getFirestore} from "firebas
 function App() {
 
   const firebaseConfig = {
-    apiKey: "AIzaSyCJTsf-MF41gqqyZP1ZRP4uG9xkuTh3Wvs",
-    authDomain: "week1-team11.firebaseapp.com",
-    projectId: "week1-team11",
-    storageBucket: "week1-team11.appspot.com",
-    messagingSenderId: "574163223150",
-    appId: "1:574163223150:web:e1d12475d686c0b837dc7f"
+  apiKey: process.env.REACT_APP_apiKey,
+   authDomain: process.env.REACT_APP_authDomain,
+   projectId: process.env.REACT_APP_projectId,
+   storageBucket: process.env.REACT_APP_storageBucket,
+   messagingSenderId: process.env.REACT_APP_messagingSenderId,
+   appId: process.env.REACT_APP_appId
   };
 
   const app = initializeApp(firebaseConfig);
