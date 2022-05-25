@@ -1,13 +1,21 @@
-import React from 'react'
+import React from "react";
+import { Card } from "@mui/material";
+import { Link } from "react-router-dom";
+// import { Card } from "react-bootstrap";
 
-export default function ClassObj({info}) {
-    const l = info.Teacher._key.path.segments.length;
+export default function ClassObj({ info }) {
+  const l = info.Teacher._key.path.segments.length;
+  console.log(info);
+
   return (
     <div>
-      <h3>{info.Subject}</h3>
-      <h3>{info.ClassName}</h3>
-      <h3>{info.Teacher._key.path.segments[l - 1]}</h3>
-
+      <Card>
+        <p>{info.Subject}</p>
+        <h4>
+          <Link to={info.ClassName}>{info.ClassName}</Link>{" "}
+          {info.Teacher._key.path.segments[l - 1]}
+        </h4>
+      </Card>
     </div>
-  )
+  );
 }
