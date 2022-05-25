@@ -23,8 +23,16 @@ function Home({ db }) {
   return (
     <>
       {retreivesentences()}
-      <h1 style={{ marginBottom: "120px" }}>Dashboard</h1>
-      <h2>Classes</h2>
+      <h1 className="display" style={{ fontSize: "60px" }}>
+        Thomas Jefferson Elementary School
+      </h1>
+      <h2
+        className="display"
+        style={{ marginBottom: "50px", fontSize: "30px" }}
+      >
+        ~Dashboard~
+      </h2>
+      <h3>Classes</h3>
       {data && data.map((cl) => <ClassObj info={cl} />)}
     </>
   );
