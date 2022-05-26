@@ -1,6 +1,12 @@
+
 .calendar-container{
   display: flex;
   justify-content: flex-start;
+
+.App {
+  text-align: center;
+  background-color: #e6d6c5;
+
 }
 
 .calendar-form-container{
@@ -22,6 +28,26 @@
   flex-wrap:wrap;
 }
 
+
 .card{
   margin:1%;
 }
+
+.display {
+  font-family: 'Vollkorn', serif;
+}
+
+
+body, h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Commissioner', sans-serif;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

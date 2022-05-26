@@ -1,10 +1,9 @@
+
 import {collection, getDocs, getFirestore, Timestamp, doc, setDoc, deleteDoc} from "firebase/firestore";
 import firebaseApp from '../firebase';
 import { Form, Button, Card } from 'react-bootstrap';
 import '../App.css';
 import {useState, useEffect, useRef} from "react"
-
-
 
 
 function Calendar(){
