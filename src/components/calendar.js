@@ -66,7 +66,8 @@ function Calendar(){
 
     return(
         <div className="calendar-container">
-            <Form onSubmit={addEvent}>
+            <div className="calendar-form-container">
+            <Form className="calendar-form" onSubmit={addEvent}>
                 <Form.Group className="mb-3" controlId="formBasicEvent">
                     <Form.Label>Event Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Event Name" ref={nameField} onChange={(e) => setName(e.target.value)} />
@@ -87,9 +88,8 @@ function Calendar(){
                 <Button variant="primary" type="submit" >
                     Submit
                 </Button>
-                
             </Form>
-
+            </div>
             <div className="calendar-events">
                 {events.length != 0? 
                 events.map((event) =>  

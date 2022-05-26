@@ -1,16 +1,27 @@
 .calendar-container{
-  display: flexbox;
+  display: flex;
   justify-content: flex-start;
 }
 
-Form{
-  width:25%;
-  border-style: solid;
+.calendar-form-container{
+  width:40%;
   margin: 5%;
-  padding:1%;
+}
+
+.calendar-form{
+  
+  border-style: solid;
+
+  padding:5%;
   border-radius: 5%;
 }
 
 .calendar-events{
   margin:5%;
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.card{
+  margin:1%;
 }

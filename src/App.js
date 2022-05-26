@@ -14,18 +14,7 @@ import firebaseApp from './firebase';
 
 
 function App() {
-
   
-  // const database = getFirestore(firebaseApp);
-
-  // //Michael Practing retreiving everything:
-  
-  // const retreivesentences = () => {
-  //   getDocs(collection(database, "Class"))
-  //       .then((allDocs) => {allDocs.forEach((doc) => console.log(doc.data()))})
-  // }
-  
-
   return (
     <div className="App">
       <BrowserRouter>
