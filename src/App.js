@@ -11,6 +11,9 @@ import Calendar from './components/calendar';
 import { initializeApp } from "firebase/app";
 import {collection, doc, updateDoc, addDoc, getDocs, getFirestore} from "firebase/firestore";
 import Classtwopage from './components/classtwopage';
+import Classonepage from './components/classonepage';
+import Classthreepage from './components/classthreepage';
+import Classfourpage from './components/classfourpage'
 import useState from 'react';
 
 
@@ -49,6 +52,10 @@ function App() {
           <Route  element={<Student/>} path="student" />
           <Route  element={<Calendar/>} path="calendar" />
           <Route element={<Classtwopage db={database}/>} path="classtwopage" />
+          <Route element={<Classonepage db={database}/>} path="classonepage" />
+          <Route element={<Classthreepage db={database}/>} path="classthreepage" />
+          <Route element={<Classfourpage db={database}/>} path='classfourpage'/>
+
         </Routes>
       </BrowserRouter>
 
