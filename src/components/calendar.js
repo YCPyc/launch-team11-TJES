@@ -8,6 +8,7 @@ import {useState, useEffect, useRef} from "react"
 
 function Calendar(){
     const [events,setEvents] = useState([]);
+    const [pastEvents,setPastEvents] = useState([]);
     const [name,setName] = useState("");
     const [date,setDate] = useState("");
     const [des,setDes] = useState("");
@@ -28,12 +29,18 @@ function Calendar(){
 
     const getEvents = () =>{
         const eventList =[];
+        const pastEventList =[];
+      
+        const now = Timestamp.now();
+        
         getDocs(collection(db, "Calendar"))
         .then((allDocs) => {
-            allDocs.forEach((doc) => eventList.push({id:doc.id,...doc.data()}))
+            allDocs.forEach((doc) => (doc.data().date<now) ? pastEventList.push({id:doc.id,...doc.data()}) : eventList.push({id:doc.id,...doc.data()}))
             // eventList.sort((a,b)=>(a.date));
-            eventList.sort((a, b) => (a.date < b.date) ? 1 : -1)
+           
+            eventList.sort((a, b) => (a.date>now && b.date>now && a.date > b.date) ? 1 : -1)
             setEvents(eventList)
+            setPastEvents(pastEventList)
             
         })
     }
@@ -90,12 +97,31 @@ function Calendar(){
             </Form>
             </div>
             <div className="calendar-events">
+                <h1 style={{ width: '100%' }}>Upcoming Events:</h1>
+                <br/>
                 {events.length != 0? 
                 events.map((event) =>  
-                (<Card style={{ width: '18rem' }} key={event.id}>
+                (
+                <Card style={{ width: '15rem' }} key={event.id}>
                     <Card.Body>
                         <Card.Title>{event.id}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">{event.date.toDate().toString()}</Card.Subtitle>
+                        <Card.Subtitle className="mb-2 text-muted">{event.date.toDate().toDateString()}</Card.Subtitle>
+                        <Card.Text>
+                        {event.description}
+                        </Card.Text>
+                        <Button variant="danger" value={event.id} onClick={deleteEvent}>Delete</Button>
+                    </Card.Body>
+                </Card> )
+            ) : <h2>No Events yet</h2>}
+            <h1 style={{ width: '100%' }}>Past Events:</h1>
+            <br/>
+            {events.length != 0? 
+                pastEvents.map((event) =>  
+                (
+                <Card style={{ width: '15rem' }} key={event.id}>
+                    <Card.Body>
+                        <Card.Title>{event.id}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">{event.date.toDate().toDateString()}</Card.Subtitle>
                         <Card.Text>
                         {event.description}
                         </Card.Text>

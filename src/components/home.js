@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, Timestamp } from "firebase/firestore";
 import ClassObj from "./ClassObj";
 import EventObj from "./EventObj";
 import { Grid } from "@mui/material";
@@ -16,23 +16,16 @@ function Home({ db }) {
       setData(classes);
     });
     const evt = [];
+    const now = Timestamp.now();
     getDocs(collection(db, "Calendar")).then((allResponses) => {
-      allResponses.forEach((c) => evt.push({ id: c.id, ...c.data() }));
+      allResponses.forEach((c) => (c.data().date>now) ? evt.push({ id: c.id, ...c.data() }) : null);
       console.log(evt);
-      evt.sort((a, b) => (a.date < b.date ? 1 : -1));
+      evt.sort((a, b) => (a.date>now && b.date>now && a.date > b.date ? 1 : -1));
       setEvents(evt);
     });
   }, [db]);
 
-  useEffect(() => {
-    const evt = [];
-    getDocs(collection(db, "Calendar")).then((allResponses) => {
-      allResponses.forEach((c) => evt.push({ id: c.id, ...c.data() }));
-      evt.sort((a, b) => (a.date > b.date ? 1 : -1));
-      console.log(evt);
-      setEvents(evt);
-    });
-  }, [db]);
+
 
   return (
     <>
@@ -52,6 +45,7 @@ function Home({ db }) {
         {events && (
           <Grid container spacing={2} style={{ paddingBottom: "80px" }}>
             {events.map((ev, idx) => {
+              console.log(events);
               if (idx < 2) {
                 return (
                   <Grid item xs={6}>

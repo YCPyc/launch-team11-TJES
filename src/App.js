@@ -12,8 +12,6 @@ import Teacher from './components/teacher';
 import Student from './components/student';
 import Calendar from './components/calendar';
 
-import { initializeApp } from "firebase/app";
-import {collection, getDocs, getFirestore} from "firebase/firestore";
 import firebaseApp from './firebase';
 
 
