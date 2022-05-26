@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, Timestamp } from "firebase/firestore";
 import ClassObj from "./ClassObj";
 import EventObj from "./EventObj";
 import { Grid } from "@mui/material";
@@ -14,14 +14,16 @@ function Home({ db }) {
       allResponses.forEach((c) => classes.push({ id: c.id, ...c.data() }));
       setData(classes);
     });
-  }, [db]);
-
-  useEffect(() => {
     const evt = [];
+    const now = Timestamp.now();
     getDocs(collection(db, "Calendar")).then((allResponses) => {
-      allResponses.forEach((c) => evt.push({ id: c.id, ...c.data() }));
-      evt.sort((a, b) => (a.date > b.date ? 1 : -1));
+      allResponses.forEach((c) =>
+        c.data().date > now ? evt.push({ id: c.id, ...c.data() }) : null
+      );
       console.log(evt);
+      evt.sort((a, b) =>
+        a.date > now && b.date > now && a.date > b.date ? 1 : -1
+      );
       setEvents(evt);
     });
   }, [db]);
@@ -47,6 +49,7 @@ function Home({ db }) {
         {events && (
           <Grid container spacing={0} style={{ paddingBottom: "25px" }}>
             {events.map((ev, idx) => {
+              console.log(events);
               if (idx < 2) {
                 return (
                   <Grid item xs={6} style={{ padding: "10px" }}>
