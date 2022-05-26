@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import ClassObj from "./ClassObj";
@@ -36,6 +37,7 @@ function Home({ db }) {
       {data && data.map((cl) => <ClassObj info={cl} />)}
     </>
   );
+
 }
 
 export default Home;
