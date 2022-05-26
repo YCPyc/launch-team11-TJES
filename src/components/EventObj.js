@@ -5,7 +5,7 @@ export default function EventObj({ info }) {
   console.log(info);
   return (
     <div>
-      <Card variant="contained" style={{ height: "200px" }}>
+      <Card variant="contained" style={{ height: "150px" }}>
         <div className="title">
           <h5>{info.id}</h5>
         </div>
