@@ -1,11 +1,23 @@
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/home";
-import NavBar from "./components/navbar";
-import Teacher from "./components/teacher";
-import Student from "./components/student";
-import Calendar from "./components/calendar";
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './App.css';
+import { BrowserRouter,
+  Routes,
+  Route, 
+} from 'react-router-dom';
+import Home from './components/home';
+import NavBar from './components/navbar';
+import Teacher from './components/teacher';
+import Student from './components/student';
+import Calendar from './components/calendar';
+
 import { initializeApp } from "firebase/app";
+
+import firebaseApp from './firebase';
+
+
+
 import {
   collection,
   doc,
@@ -14,13 +26,9 @@ import {
   getDocs,
   getFirestore,
 } from "firebase/firestore";
-import Classtwopage from "./components/classtwopage";
-import Classonepage from "./components/classonepage";
-import Classthreepage from "./components/classthreepage";
-import Classfourpage from "./components/classfourpage";
-import useState from "react";
 
 function App() {
+
   const firebaseConfig = {
     apiKey: process.env.REACT_APP_apiKey,
     authDomain: process.env.REACT_APP_authDomain,
@@ -42,6 +50,7 @@ function App() {
           <Route element={<Teacher />} path="teacher" />
           <Route element={<Student />} path="student" />
           <Route element={<Calendar />} path="calendar" />
+
           <Route element={<Classtwopage db={database} />} path="classtwopage" />
           <Route element={<Classonepage db={database} />} path="classonepage" />
           <Route
@@ -52,6 +61,7 @@ function App() {
             element={<Classfourpage db={database} />}
             path="classfourpage"
           />
+
         </Routes>
       </BrowserRouter>
     </div>
