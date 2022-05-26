@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import ClassObj from "./ClassObj";
@@ -14,13 +13,6 @@ function Home({ db }) {
     getDocs(collection(db, "Class")).then((allResponses) => {
       allResponses.forEach((c) => classes.push({ id: c.id, ...c.data() }));
       setData(classes);
-    });
-    const evt = [];
-    getDocs(collection(db, "Calendar")).then((allResponses) => {
-      allResponses.forEach((c) => evt.push({ id: c.id, ...c.data() }));
-      console.log(evt);
-      evt.sort((a, b) => (a.date < b.date ? 1 : -1));
-      setEvents(evt);
     });
   }, [db]);
 
@@ -50,11 +42,11 @@ function Home({ db }) {
       <div className="calendar">
         <h3>Upcoming Events</h3>
         {events && (
-          <Grid container spacing={2} style={{ paddingBottom: "80px" }}>
+          <Grid container spacing={0} style={{ paddingBottom: "25px" }}>
             {events.map((ev, idx) => {
               if (idx < 2) {
                 return (
-                  <Grid item xs={6}>
+                  <Grid item xs={6} style={{ padding: "10px" }}>
                     <EventObj info={ev} />
                   </Grid>
                 );
@@ -66,11 +58,11 @@ function Home({ db }) {
       <div className="classes">
         <h3>Classes</h3>
         {data && (
-          <Grid container spacing={0.5}>
+          <Grid container spacing={0}>
             {" "}
             {""}
             {data.map((cl) => (
-              <Grid item xs={6}>
+              <Grid item xs={6} style={{ padding: "10px" }}>
                 <ClassObj info={cl} />
               </Grid>
             ))}{" "}
@@ -80,7 +72,6 @@ function Home({ db }) {
       </div>
     </>
   );
-
 }
 
 export default Home;
