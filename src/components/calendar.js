@@ -71,66 +71,73 @@ function Calendar() {
   };
 
   return (
-    <div className="calendar-container">
-      <div className="calendar-form-container">
-        <Form className="calendar-form" onSubmit={addEvent}>
-          <Form.Group className="mb-3" controlId="formBasicEvent">
-            <Card.Header as="h5">Create Events</Card.Header>
-            <Form.Label>Event Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Event Name"
-              ref={nameField}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
+    <>
+      <h1 className="display">School Events</h1>
+      <div className="calendar-container">
+        <div className="calendar-form-container">
+          <Form className="calendar-form" onSubmit={addEvent}>
+            <Form.Group className="mb-3" controlId="formBasicEvent">
+              <Card.Header as="h5">Create Events</Card.Header>
+              <Form.Label>Event Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Event Name"
+                ref={nameField}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Date</Form.Label>
-            <Form.Control
-              type="date"
-              placeholder="date"
-              ref={dateField}
-              onChange={(e) => setDate(e.target.value)}
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Date</Form.Label>
+              <Form.Control
+                type="date"
+                placeholder="date"
+                ref={dateField}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicDes">
-            <Form.Label>Event Descirption</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Event Description"
-              ref={desField}
-              onChange={(e) => setDes(e.target.value)}
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicDes">
+              <Form.Label>Event Descirption</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Event Description"
+                ref={desField}
+                onChange={(e) => setDes(e.target.value)}
+              />
+            </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </div>
+        <div className="calendar-events">
+          {events.length != 0 ? (
+            events.map((event) => (
+              <Card style={{ width: "18rem" }} key={event.id}>
+                <Card.Body>
+                  <Card.Title>{event.id}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    {event.date.toDate().toDateString()}
+                  </Card.Subtitle>
+                  <Card.Text>{event.description}</Card.Text>
+                  <Button
+                    variant="danger"
+                    value={event.id}
+                    onClick={deleteEvent}
+                  >
+                    Delete
+                  </Button>
+                </Card.Body>
+              </Card>
+            ))
+          ) : (
+            <h2>No Events yet</h2>
+          )}
+        </div>
       </div>
-      <div className="calendar-events">
-        {events.length != 0 ? (
-          events.map((event) => (
-            <Card style={{ width: "18rem" }} key={event.id}>
-              <Card.Body>
-                <Card.Title>{event.id}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  {event.date.toDate().toDateString()}
-                </Card.Subtitle>
-                <Card.Text>{event.description}</Card.Text>
-                <Button variant="danger" value={event.id} onClick={deleteEvent}>
-                  Delete
-                </Button>
-              </Card.Body>
-            </Card>
-          ))
-        ) : (
-          <h2>No Events yet</h2>
-        )}
-      </div>
-    </div>
+    </>
   );
 }
 
