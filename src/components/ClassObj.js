@@ -4,52 +4,38 @@ import { Link } from "react-router-dom";
 
 export default function ClassObj({ info }) {
   const l = info.Teacher._key.path.segments.length;
-  console.log(info);
+  //console.log(info);
 
   return (
     <div>
-      <Grid container direction="row" spacing={0.5}>
-        <Grid item xs={6} direction="row" align-items="center" justify="center">
-          <Card
-            variant="contained"
+      <Card
+        variant="contained"
+        style={{
+          height: "100px",
+          marginBottom: "10px",
+        }}
+      >
+        <div className="class info">
+          <p
             style={{
-              height: "75px",
-              marginBottom: "10px",
+              textAlign: "left",
+              marginLeft: "20px",
+              marginBottom: "0px",
+              fontSize: "medium",
             }}
           >
-            <div className="class info">
-              <p
-                style={{
-                  textAlign: "left",
-                  marginLeft: "20px",
-                  marginBottom: "0px",
-                  fontSize: "medium",
-                }}
-              >
-                {info.Subject}
-              </p>
-              <h4 style={{ paddingBottom: "20px" }}>
-                <Link to={info.ClassName}>{info.ClassName}</Link>{" "}
-              </h4>
-            </div>
-          </Card>
-        </Grid>
-        <Grid item xs={6} direction="row" align-items="center" justify="center">
-          <Card
-            variant="contained"
-            style={{
-              height: "75px",
-              marginBottom: "10px",
-            }}
-          >
-            <div className="teacher name">
-              <h4 style={{ padding: "25px" }}>
-                {info.Teacher._key.path.segments[l - 1]}
-              </h4>
-            </div>
-          </Card>
-        </Grid>
-      </Grid>
+            {info.Subject}
+          </p>
+          <h5 style={{ marginBottom: "10px" }}>
+            <Link to={info.ClassName}>{info.ClassName}</Link>{" "}
+          </h5>
+        </div>
+        <div className="teacher name">
+          <h6 style={{ paddingBottom: "25px" }}>
+            {info.Teacher._key.path.segments[l - 1]}
+          </h6>
+        </div>
+      </Card>
     </div>
   );
 }
