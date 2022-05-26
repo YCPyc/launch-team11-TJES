@@ -75,6 +75,7 @@ function Calendar(){
             <div className="calendar-form-container">
             <Form className="calendar-form" onSubmit={addEvent}>
                 <Form.Group className="mb-3" controlId="formBasicEvent">
+                    <Card.Header as="h5">Create Events</Card.Header>
                     <Form.Label>Event Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Event Name" ref={nameField} onChange={(e) => setName(e.target.value)} />
                    
@@ -106,6 +107,7 @@ function Calendar(){
                     <Card.Body>
                         <Card.Title>{event.id}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{event.date.toDate().toDateString()}</Card.Subtitle>
+
                         <Card.Text>
                         {event.description}
                         </Card.Text>
@@ -113,6 +115,7 @@ function Calendar(){
                     </Card.Body>
                 </Card> )
             ) : <h2>No Events yet</h2>}
+
             <h1 style={{ width: '100%' }}>Past Events:</h1>
             <br/>
             {events.length != 0? 
