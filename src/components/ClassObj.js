@@ -8,8 +8,8 @@ export default function ClassObj({ info }) {
 
   return (
     <div>
-      <Grid container spacing={0.5}>
-        <Grid item xs={6}>
+      <Grid container direction="row" spacing={0.5}>
+        <Grid item xs={6} direction="row" align-items="center" justify="center">
           <Card
             variant="contained"
             style={{
@@ -34,7 +34,7 @@ export default function ClassObj({ info }) {
             </div>
           </Card>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} direction="row" align-items="center" justify="center">
           <Card
             variant="contained"
             style={{
