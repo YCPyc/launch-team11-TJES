@@ -1,31 +1,46 @@
+
+.calendar-container{
+  display: flex;
+  justify-content: flex-start;}
+
 .App {
   text-align: center;
+  background-color: #e6d6c5;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.calendar-form-container{
+  width:40%;
+  margin: 5%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.calendar-form{
+  
+  border-style: solid;
+
+  padding:5%;
+  border-radius: 5%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.calendar-events{
+  margin:5%;
+  display:flex;
+  flex-wrap:wrap;
 }
 
-.App-link {
-  color: #61dafb;
+
+.card{
+  margin:1%;
+
+}
+
+.display {
+  font-family: 'Vollkorn', serif;
+}
+
+
+body, h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Commissioner', sans-serif;
 }
 
 @keyframes App-logo-spin {
@@ -36,3 +51,4 @@
     transform: rotate(360deg);
   }
 }
+
