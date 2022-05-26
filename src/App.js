@@ -13,6 +13,11 @@ import Student from './components/student';
 import Calendar from './components/calendar';
 
 import { initializeApp } from "firebase/app";
+import {collection, getDocs, getFirestore} from "firebase/firestore";
+import firebaseApp from './firebase';
+
+
+import { initializeApp } from "firebase/app";
 import {
   collection,
   doc,
@@ -23,6 +28,7 @@ import {
 } from "firebase/firestore";
 
 function App() {
+
   const firebaseConfig = {
     apiKey: process.env.REACT_APP_apiKey,
     authDomain: process.env.REACT_APP_authDomain,
@@ -35,13 +41,6 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const database = getFirestore(app);
 
-  //Michael Practing retreiving everything:
-  /*
-  const retreivesentences = () => {
-    getDocs(collection(database, "Class"))
-        .then((allDocs) => {allDocs.forEach((doc) => console.log(doc.data()))})
-  }
-  */
 
   return (
     <div className="App">
