@@ -183,10 +183,12 @@ function Classthreepage({ db }) {
     return (
       <div>
         <div>
-          <h1>Class page</h1>
-          <h2>Class: {responses[1].ClassName}</h2>
-          <h2>Subject: {responses[1].Subject}</h2>
-          <h2>Teacher: {responses[1].Teacher._key.path.segments[6]}</h2>
+          <h1 className="display">Class page</h1>
+          <h3 className="display">Class: {responses[1].ClassName}</h3>
+          <h3 className="display">Subject: {responses[1].Subject}</h3>
+          <h3 className="display">
+            Teacher: {responses[1].Teacher._key.path.segments[6]}
+          </h3>
 
           <h3></h3>
         </div>

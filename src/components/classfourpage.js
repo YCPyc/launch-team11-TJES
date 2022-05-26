@@ -183,10 +183,12 @@ function Classfourpage({ db }) {
     return (
       <div>
         <div>
-          <h1>Class page</h1>
-          <h2>Class: {responses[2].ClassName}</h2>
-          <h2>Subject: {responses[2].Subject}</h2>
-          <h2>Teacher: {responses[2].Teacher._key.path.segments[6]}</h2>
+          <h1 className="display">Class page</h1>
+          <h3 className="display">Class: {responses[2].ClassName}</h3>
+          <h3 className="display">Subject: {responses[2].Subject}</h3>
+          <h3 className="display">
+            Teacher: {responses[2].Teacher._key.path.segments[6]}
+          </h3>
 
           <h3></h3>
         </div>

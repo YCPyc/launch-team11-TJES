@@ -183,10 +183,12 @@ function Classtwopage({ db }) {
     return (
       <div>
         <div>
-          <h1>Class page</h1>
-          <h2>Class: {responses[0].ClassName}</h2>
-          <h2>Subject: {responses[0].Subject}</h2>
-          <h2>Teacher: {responses[0].Teacher._key.path.segments[6]}</h2>
+          <h1 className="display">Class page</h1>
+          <h3 className="display">Class: {responses[0].ClassName}</h3>
+          <h3 className="display">Subject: {responses[0].Subject}</h3>
+          <h3 className="display">
+            Teacher: {responses[0].Teacher._key.path.segments[6]}
+          </h3>
           <h3>
             {console.log(
               "Accessing child from student Array:",
