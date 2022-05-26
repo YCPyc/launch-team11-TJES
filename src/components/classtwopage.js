@@ -3,6 +3,9 @@ import {collection, doc, updateDoc, addDoc, getDocs, getFirestore, setDoc, delet
 import {useEffect} from "react";
 import {useState, useRef} from "react";
 import Grid from '@mui/material/Grid';
+import { DataGrid } from '@mui/x-data-grid';
+import {TableContainer, Table, TableHead, TableBody,TableRow,TableCell,Paper, Button} from '@mui/material'
+
 
 
 function Classtwopage({db}){
@@ -12,6 +15,7 @@ function Classtwopage({db}){
     const [studentsArray, setStudentsArray] = useState([]);
     const [secondArray, setSecondArray] = useState([]);
     const [listOfStudents, setListOfStudents] = useState("");
+    const [arrayOfStudents, setArrayOfStudents] = useState([])
     const [otherList, setOtherList] = useState("");
     const textFieldRef = useRef(null);
     const [nameString, setnameString] = ("Class2Student")
@@ -19,6 +23,8 @@ function Classtwopage({db}){
     const otherRef = useRef();
     const editRefOne = useRef();
     const editRefTwo = useRef();
+    const editRefThree = useRef();
+    const [editBox, setEditBox] = useState(false);
     let studentnumber = 7;
     //let nameString = "Class2Student";
 
@@ -68,13 +74,13 @@ function Classtwopage({db}){
         console.log("text field ref: ",otherRef.current.value)
     
 
-        const newResponse = textFieldRef.current.value
+        //const newResponse = textFieldRef.current.value
         
         const data = {
             
         };
         const ResponseName= {
-          nameString: textFieldRef.current.value
+          //nameString: textFieldRef.current.value
         }
         
         setDoc(doc(db, "Class/Class2/Class2Students", otherRef.current.value),data) // add the new response 
@@ -88,6 +94,7 @@ function Classtwopage({db}){
 
     const deleteResponse = (e) => {
       e.preventDefault();
+
       //console.log("running delete response")
       //console.log(textFieldRef.current.value)
       
@@ -97,6 +104,21 @@ function Classtwopage({db}){
       getStudents();
 
       textFieldRef.current.value = ""
+
+    }
+
+    const tableDeleteResponse = (input) => {
+      //e.preventDefault();
+
+      //console.log("running delete response")
+      //console.log(textFieldRef.current.value)
+      
+      deleteDoc(doc(db,"Class/Class2/Class2Students", input))
+
+
+      getStudents();
+
+      //textFieldRef.current.value = ""
 
     }
 
@@ -113,6 +135,33 @@ function Classtwopage({db}){
       editRefOne.current.value = ""
     }
 
+    const tableEditGrade = (input1) => {
+      //e.preventDefault();
+
+      console.log(input1)
+      console.log(editRefThree.current.value)
+      updateDoc(doc(db,"Class/Class2/Class2Students", input1),{
+        grade: editRefThree.current.value
+      });
+
+      getStudents();
+
+      editRefThree.current.value = ""
+      //editRefTwo.current.value = ""
+      //editRefOne.current.value = ""
+    }
+
+
+    /*
+    <div>
+              <form onSubmit={editGrade}>
+              <h2>Edit Student Grade:</h2>
+              <label>Name: <input type="text" ref={editRefOne} /> </label>
+              <label>Grade: <input type="text" ref={editRefTwo} /> </label> 
+              <input type="Submit" />
+              </form>
+    </div>
+    */
    
     
 
@@ -134,15 +183,9 @@ function Classtwopage({db}){
             
             </div>
 
-            <div>
-                <h2>Roster:</h2>
-                {console.log({responses})}
-                
-                <h3>{listOfStudents}</h3>
-            </div>
 
 
-
+    
             <div>
                 <h2>Add Student:</h2>
                 <form onSubmit={addResponse}>
@@ -154,20 +197,44 @@ function Classtwopage({db}){
             </div>
 
             <div>
-                <h2>Delete Student:</h2>
-                <form onSubmit={deleteResponse}>
-                <input type="text" ref={textFieldRef} />
-                <input type="Submit" />
-                </form>
-
+              <h1>Class Roster:</h1>
+              <TableContainer component={Paper}>
+                <Table aria-label='Roster'>
+                  <TableHead>
+                    <TableRow>
+                      
+                      <TableCell>Name</TableCell>
+                      <TableCell>Grade</TableCell>
+                      <TableCell></TableCell>
+                      </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {studentsArray.map(row => (
+                      <TableRow key={row.id}>
+                        
+                        <TableCell>{row.id}</TableCell>
+                        <TableCell>{row.grade}</TableCell>
+                        <TableCell>  
+                          
+                        </TableCell>
+                        <TableCell><Button variant="contained" onClick={() =>tableDeleteResponse(row.id)}>Delete</Button></TableCell>
+                        
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <Button variant="contained" onClick={() =>setEditBox(editBox => !editBox)}>Edit Grades</Button>
             </div>
+            
             <div>
+              {editBox==true && 
               <form onSubmit={editGrade}>
-              <h2>Edit Student Grade:</h2>
               <label>Name: <input type="text" ref={editRefOne} /> </label>
               <label>Grade: <input type="text" ref={editRefTwo} /> </label> 
               <input type="Submit" />
               </form>
+            }
             </div>
             
         </div>
