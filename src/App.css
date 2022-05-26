@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #e6d6c5;
 }
 
 .App-logo {
@@ -26,6 +27,15 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.display {
+  font-family: 'Vollkorn', serif;
+}
+
+
+body, h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Commissioner', sans-serif;
 }
 
 @keyframes App-logo-spin {
