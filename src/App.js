@@ -20,20 +20,6 @@ import Classthreepage from "./components/classthreepage";
 import Classfourpage from "./components/classfourpage";
 import useState from "react";
 
-import { initializeApp } from "firebase/app";
-
-
-
-
-import {
-  collection,
-  doc,
-  updateDoc,
-  addDoc,
-  getDocs,
-  getFirestore,
-} from "firebase/firestore";
-
 function App() {
   const firebaseConfig = {
     apiKey: process.env.REACT_APP_apiKey,
@@ -47,23 +33,12 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const database = getFirestore(app);
 
-<<<<<<< HEAD
-  //Michael Practing retreiving everything:
-
-  // const retreivesentences = () => {
-  //   getDocs(collection(database, "Class"))
-  //       .then((allDocs) => {allDocs.forEach((doc) => console.log(doc.data()))})
-  // }
-=======
->>>>>>> d4d70b0b51228d4c0daba3f0c89e3b13243541b0
-
   return (
     <div className="App">
       <BrowserRouter>
         <NavBar />
         <Routes>
-<<<<<<< HEAD
-          <Route element={<Home />} path="/" />
+          <Route element={<Home db={database} />} path="/" />
           <Route element={<Teacher />} path="teacher" />
           <Route element={<Student />} path="student" />
           <Route element={<Calendar />} path="calendar" />
@@ -77,12 +52,6 @@ function App() {
             element={<Classfourpage db={database} />}
             path="classfourpage"
           />
-=======
-          <Route element={<Home db={database} />} path="/" />
-          <Route element={<Teacher />} path="teacher" />
-          <Route element={<Student />} path="student" />
-          <Route element={<Calendar />} path="calendar" />
->>>>>>> d4d70b0b51228d4c0daba3f0c89e3b13243541b0
         </Routes>
       </BrowserRouter>
     </div>
