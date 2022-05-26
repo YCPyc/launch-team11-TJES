@@ -9,30 +9,22 @@ import Teacher from './components/teacher';
 import Student from './components/student';
 import Calendar from './components/calendar';
 import { initializeApp } from "firebase/app";
-import {collection, doc, updateDoc, addDoc, getDocs, getFirestore} from "firebase/firestore";
+import {collection, getDocs, getFirestore} from "firebase/firestore";
+import firebaseApp from './firebase';
 
 
 function App() {
 
-  const firebaseConfig = {
-  apiKey: process.env.REACT_APP_apiKey,
-   authDomain: process.env.REACT_APP_authDomain,
-   projectId: process.env.REACT_APP_projectId,
-   storageBucket: process.env.REACT_APP_storageBucket,
-   messagingSenderId: process.env.REACT_APP_messagingSenderId,
-   appId: process.env.REACT_APP_appId
-  };
+  
+  // const database = getFirestore(firebaseApp);
 
-  const app = initializeApp(firebaseConfig);
-  const database = getFirestore(app);
-
-  //Michael Practing retreiving everything:
-  /*
-  const retreivesentences = () => {
-    getDocs(collection(database, "Class"))
-        .then((allDocs) => {allDocs.forEach((doc) => console.log(doc.data()))})
-  }
-  */
+  // //Michael Practing retreiving everything:
+  
+  // const retreivesentences = () => {
+  //   getDocs(collection(database, "Class"))
+  //       .then((allDocs) => {allDocs.forEach((doc) => console.log(doc.data()))})
+  // }
+  
 
   return (
     <div className="App">
