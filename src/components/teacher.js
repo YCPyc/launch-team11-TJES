@@ -15,12 +15,13 @@ function Teacher(){
         const teachData = [];
         getDocs(collection(db, "Teacher"))
             .then((allDocs) => {
-            allDocs.forEach((doc) => teachData.push(doc.data()))
+            allDocs.forEach((doc) => teachData.push({id:doc.id, ...doc.data()}))
             setStudData(teachData)
         })
     }, [db]);
 
     console.log(teachData);
+   
     //console.log(teachData[0].class)
     if(teachData) {
         return(
@@ -39,7 +40,7 @@ function Teacher(){
                     <tbody>
                         {teachData.map((cell) => {
                             return(
-                                <tr>
+                                <tr key={cell.id}>
                                     <td>{cell.name}</td>
                                     <td>{cell.DOB}</td>
                                     <td>{cell.cred}</td>

@@ -14,7 +14,7 @@ function Student(){
         const studData = [];
         getDocs(collection(db, "Student"))
             .then((allDocs) => {
-            allDocs.forEach((doc) => studData.push(doc.data()))
+            allDocs.forEach((doc) => studData.push({id:doc.id, ...doc.data()}))
             setStudData(studData)
         })
     }, [db]);
@@ -37,7 +37,7 @@ function Student(){
                     <tbody>
                         {studData.map((cell) => {
                             return(
-                                <tr>
+                                <tr key = {cell.id}>
                                     <td>{cell.name}</td>
                                     <td>{cell.DOB}</td>
                                     <td>{cell.dietRest}</td>

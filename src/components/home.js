@@ -54,7 +54,7 @@ function Home({ db }) {
             {events.map((ev, idx) => {
               if (idx < 2) {
                 return (
-                  <Grid item xs={6}>
+                  <Grid key={ev.id} item xs={6}>
                     <EventObj info={ev} />
                   </Grid>
                 );
@@ -70,7 +70,7 @@ function Home({ db }) {
             {" "}
             {""}
             {data.map((cl) => (
-              <Grid item xs={6}>
+              <Grid key={cl.id} item xs={6}>
                 <ClassObj info={cl} />
               </Grid>
             ))}{" "}
