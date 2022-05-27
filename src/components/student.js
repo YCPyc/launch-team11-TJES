@@ -26,7 +26,9 @@ function Student() {
   if (studData) {
     return (
       <div>
-        <h1 className="display">Student Directory</h1>
+        <h1 class="table-responsive" className="display">
+          Student Directory
+        </h1>
         <Table striped bordered hover>
           <thead>
             <tr>
