@@ -113,6 +113,7 @@ function Calendar(){
                     </Card.Body>
                 </Card> )
             ) : <h2>No Events yet</h2>}
+            
             <h1 style={{ width: '100%' }}>Past Events:</h1>
             <br/>
             {events.length != 0? 
