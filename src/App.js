@@ -41,7 +41,6 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const database = getFirestore(app);
 
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -51,6 +50,18 @@ function App() {
           <Route element={<Teacher />} path="teacher" />
           <Route element={<Student />} path="student" />
           <Route element={<Calendar />} path="calendar" />
+
+          <Route element={<Classtwopage db={database} />} path="classtwopage" />
+          <Route element={<Classonepage db={database} />} path="classonepage" />
+          <Route
+            element={<Classthreepage db={database} />}
+            path="classthreepage"
+          />
+          <Route
+            element={<Classfourpage db={database} />}
+            path="classfourpage"
+          />
+
         </Routes>
       </BrowserRouter>
     </div>
