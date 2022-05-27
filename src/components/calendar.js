@@ -31,13 +31,13 @@ function Calendar(){
         const pastEventList =[];
       
         const now = Timestamp.now();
-        
+        console.log("Current Events:"+now);
         getDocs(collection(db, "Calendar"))
         .then((allDocs) => {
             allDocs.forEach((doc) => (doc.data().date<now) ? pastEventList.push({id:doc.id,...doc.data()}) : eventList.push({id:doc.id,...doc.data()}))
             // eventList.sort((a,b)=>(a.date));
-           
-            eventList.sort((a, b) => (a.date>now && b.date>now && a.date > b.date) ? 1 : -1)
+           console.log(pastEventList);
+            eventList.sort((a, b) => (a.date>=now && b.date>=now && a.date > b.date) ? 1 : -1)
             setEvents(eventList)
             setPastEvents(pastEventList)
             
@@ -47,7 +47,11 @@ function Calendar(){
 
     const addEvent= (e) =>{
         e.preventDefault();
-        const date_TimeStamp =Timestamp.fromDate(new Date(dateField.current.value))
+        const d = new Date(dateField.current.value.replace(/-/g, '\/'))
+        const date_TimeStamp =Timestamp.fromDate(d)
+        console.log("added og time:"+ dateField.current.value)
+        console.log("added og time:"+ d)
+        console.log("added time:"+ d.toLocaleString('en-US', { timeZone: 'America/New_York' }))
         const newEvent = {
             date: date_TimeStamp,
             description: desField.current.value
