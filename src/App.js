@@ -12,10 +12,12 @@ import Teacher from './components/teacher';
 import Student from './components/student';
 import Calendar from './components/calendar';
 
-import firebaseApp from './firebase';
-
 
 import { initializeApp } from "firebase/app";
+
+
+
+
 import {
   collection,
   doc,
