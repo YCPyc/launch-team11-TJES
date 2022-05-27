@@ -1,4 +1,3 @@
-
 import {collection, getDocs, getFirestore, Timestamp, doc, setDoc, deleteDoc} from "firebase/firestore";
 import firebaseApp from '../firebase';
 import { Form, Button, Card } from 'react-bootstrap';
@@ -115,11 +114,7 @@ function Calendar(){
                     </Card.Body>
                 </Card> )
             ) : <h2>No Events yet</h2>}
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 66cde21d4627c36db94f236f87f17113aa980ee3
             <h1 style={{ width: '100%' }}>Past Events:</h1>
             <br/>
             {events.length != 0? 
