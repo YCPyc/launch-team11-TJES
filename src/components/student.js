@@ -23,7 +23,6 @@ function Student() {
     });
   }, [db]);
 
-<<<<<<< HEAD
     useEffect(() => {
         const studData = [];
         getDocs(collection(db, "Student"))
@@ -74,48 +73,6 @@ function Student() {
             </>
         )
     }
-=======
-  if (studData) {
-    return (
-      <div>
-        <h1 className="display">Student Directory</h1>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>DOB</th>
-              <th>Dietary Restrictions</th>
-              <th>Learning Restrictions</th>
-              <th>Class</th>
-              <th>Grade</th>
-            </tr>
-          </thead>
-          <tbody>
-            {studData.map((cell) => {
-              return (
-                <tr>
-                  <td>{cell.name}</td>
-                  <td>{cell.DOB}</td>
-                  <td>{cell.dietRest}</td>
-                  <td>{cell.learnRest}</td>
-                  <td>{cell.class}</td>
-                  <td>{cell.grade}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
-      </div>
-    );
-  } else {
-    return (
-      <>
-        <h1>Student Directory</h1>
-        <h2>Data loading...</h2>
-      </>
-    );
-  }
->>>>>>> 0f83ca751cf1d0ff2fafd1213bb9967f7d7ea481
 }
 
 export default Student;

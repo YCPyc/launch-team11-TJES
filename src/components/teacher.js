@@ -25,7 +25,6 @@ function Teacher() {
     });
   }, [db]);
 
-<<<<<<< HEAD
     useEffect(() => {
         const teachData = [];
         getDocs(collection(db, "Teacher"))
@@ -118,7 +117,6 @@ function Teacher() {
       </>
     );
   }
->>>>>>> 0f83ca751cf1d0ff2fafd1213bb9967f7d7ea481
 }
 
 export default Teacher;
