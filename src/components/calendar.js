@@ -31,15 +31,18 @@ function Calendar(){
         const pastEventList =[];
       
         const now = Timestamp.now();
-        console.log("Current Events:"+now);
+        let nowDate = now.toDate();
+        nowDate.setHours(0,0,0,0);
+ 
         getDocs(collection(db, "Calendar"))
         .then((allDocs) => {
-            allDocs.forEach((doc) => (doc.data().date<now) ? pastEventList.push({id:doc.id,...doc.data()}) : eventList.push({id:doc.id,...doc.data()}))
-            // eventList.sort((a,b)=>(a.date));
-           console.log(pastEventList);
-            eventList.sort((a, b) => (a.date>=now && b.date>=now && a.date > b.date) ? 1 : -1)
-            setEvents(eventList)
-            setPastEvents(pastEventList)
+            allDocs.forEach((doc) => {
+            let currDate = doc.data().date.toDate();
+            currDate.setHours(0);
+            (doc.data().date.toDate().setHours(0,0,0,0) < nowDate ? pastEventList.push({id:doc.id,...doc.data()}) : eventList.push({id:doc.id,...doc.data()}));
+            eventList.sort((a, b) => (a.date>=now && b.date>=now && a.date > b.date) ? 1 : -1);
+            setEvents(eventList);
+            setPastEvents(pastEventList)})
             
         })
     }
