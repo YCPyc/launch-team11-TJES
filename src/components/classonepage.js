@@ -4,6 +4,7 @@ import {
   updateDoc,
   addDoc,
   getDocs,
+  getDoc,
   getFirestore,
   setDoc,
   deleteDoc,
@@ -85,6 +86,17 @@ function Classonepage({ db }) {
     return;
   }
 
+  const [classData, setClassData] = useState();
+  useEffect(() => {
+    const classes = [];
+    getDoc(doc(db, "Class", "TestClass1")).then((allResponses) => {
+      console.log(allResponses.data());
+      //allResponses.forEach((c) => classes.push({ id: c.id, ...c.data() }));
+      setClassData(allResponses.data());
+      console.log(classData);
+    });
+  }, [db]);
+
   const addResponse = (e) => {
     e.preventDefault(); // no reloading the page
     console.log("text field ref: ", otherRef.current.value);
@@ -100,6 +112,14 @@ function Classonepage({ db }) {
       doc(db, "Class/TestClass1/TC1Students", otherRef.current.value),
       data
     ); // add the new response
+
+    setDoc(doc(db, "Student", otherRef.current.value), {
+      DOB: "n/a",
+      class: classData.ClassName,
+      dietRest: "n/a",
+      learnRest: "n/a",
+      name: otherRef.current.value,
+    });
 
     //addDoc((doc(db,"Class/Class2/Class2Students", textFieldRef.current.value)))
 
@@ -117,6 +137,7 @@ function Classonepage({ db }) {
     deleteDoc(
       doc(db, "Class/TestClass1/TC1Students", textFieldRef.current.value)
     );
+    deleteDoc(doc(db, "Student", textFieldRef.current.value));
 
     getStudents();
 
@@ -130,6 +151,7 @@ function Classonepage({ db }) {
     //console.log(textFieldRef.current.value)
 
     deleteDoc(doc(db, "Class/TestClass1/TC1Students", input));
+    deleteDoc(doc(db, "Student", input));
 
     getStudents();
 
@@ -146,6 +168,10 @@ function Classonepage({ db }) {
       }
     );
 
+    updateDoc(doc(db, "Student", editRefOne.current.value), {
+      grade: editRefTwo.current.value,
+    });
+
     getStudents();
 
     editRefTwo.current.value = "";
@@ -160,6 +186,9 @@ function Classonepage({ db }) {
     updateDoc(doc(db, "Class/TestClass1/TC1Students", input1), {
       grade: editRefThree.current.value,
     });
+    updateDoc(doc(db, "Student", input1), {
+      grade: editRefThree.current.value,
+    });
 
     getStudents();
 
@@ -167,6 +196,27 @@ function Classonepage({ db }) {
     //editRefTwo.current.value = ""
     //editRefOne.current.value = ""
   };
+
+  const [students, setStudents] = useState();
+  useEffect(() => {
+    const ss = [];
+    getDocs(collection(db, "Class", "TestClass1/TC1Students")).then(
+      (allResponses) => {
+        allResponses.forEach((s) => {
+          if (responses) {
+            setDoc(doc(db, "Student", s.id), {
+              name: s.id,
+              DOB: "n/a",
+              class: responses[3].ClassName,
+              dietRest: "n/a",
+              learnRest: "n/a",
+              grade: s.data().grade,
+            });
+          }
+        });
+      }
+    );
+  }, [db]);
 
   /*
     <div>

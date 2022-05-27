@@ -4,6 +4,7 @@ import {
   updateDoc,
   addDoc,
   getDocs,
+  getDoc,
   getFirestore,
   setDoc,
   deleteDoc,
@@ -85,6 +86,17 @@ function Classfourpage({ db }) {
     return;
   }
 
+  const [classData, setClassData] = useState();
+  useEffect(() => {
+    const classes = [];
+    getDoc(doc(db, "Class", "Class4")).then((allResponses) => {
+      console.log(allResponses.data());
+      //allResponses.forEach((c) => classes.push({ id: c.id, ...c.data() }));
+      setClassData(allResponses.data());
+      console.log(classData);
+    });
+  }, [db]);
+
   const addResponse = (e) => {
     e.preventDefault(); // no reloading the page
     console.log("text field ref: ", otherRef.current.value);
@@ -100,6 +112,14 @@ function Classfourpage({ db }) {
       doc(db, "Class/Class4/Class4Students", otherRef.current.value),
       data
     ); // add the new response
+
+    setDoc(doc(db, "Student", otherRef.current.value), {
+      DOB: "n/a",
+      class: classData.ClassName,
+      dietRest: "n/a",
+      learnRest: "n/a",
+      name: otherRef.current.value,
+    });
 
     //addDoc((doc(db,"Class/Class2/Class2Students", textFieldRef.current.value)))
 
@@ -117,6 +137,7 @@ function Classfourpage({ db }) {
     deleteDoc(
       doc(db, "Class/Class4/Class4Students", textFieldRef.current.value)
     );
+    deleteDoc(doc(db, "Student", textFieldRef.current.value));
 
     getStudents();
 
@@ -130,6 +151,7 @@ function Classfourpage({ db }) {
     //console.log(textFieldRef.current.value)
 
     deleteDoc(doc(db, "Class/Class4/Class4Students", input));
+    deleteDoc(doc(db, "Student", input));
 
     getStudents();
 
@@ -146,6 +168,10 @@ function Classfourpage({ db }) {
       }
     );
 
+    updateDoc(doc(db, "Student", editRefOne.current.value), {
+      grade: editRefTwo.current.value,
+    });
+
     getStudents();
 
     editRefTwo.current.value = "";
@@ -160,6 +186,9 @@ function Classfourpage({ db }) {
     updateDoc(doc(db, "Class/Class4/Class4Students", input1), {
       grade: editRefThree.current.value,
     });
+    updateDoc(doc(db, "Student", input1), {
+      grade: editRefThree.current.value,
+    });
 
     getStudents();
 
@@ -167,6 +196,30 @@ function Classfourpage({ db }) {
     //editRefTwo.current.value = ""
     //editRefOne.current.value = ""
   };
+  if (responses) {
+    console.log(responses[2]);
+  }
+
+  const [students, setStudents] = useState();
+  useEffect(() => {
+    const ss = [];
+    getDocs(collection(db, "Class", "Class4/Class4Students")).then(
+      (allResponses) => {
+        allResponses.forEach((s) => {
+          if (responses) {
+            setDoc(doc(db, "Student", s.id), {
+              name: s.id,
+              DOB: "n/a",
+              class: responses[2].ClassName,
+              dietRest: "n/a",
+              learnRest: "n/a",
+              grade: s.data().grade,
+            });
+          }
+        });
+      }
+    );
+  }, [db]);
 
   /*
     <div>
@@ -183,7 +236,7 @@ function Classfourpage({ db }) {
     return (
       <div>
         <div>
-          <h1 className="display">Class page</h1>
+          <h1 className="display">Class Page</h1>
           <h3 className="display">Class: {responses[2].ClassName}</h3>
           <h3 className="display">Subject: {responses[2].Subject}</h3>
           <h3 className="display">
